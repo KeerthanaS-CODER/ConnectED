@@ -1,4 +1,4 @@
-# ConnectED - Gamefied Learning platform
+# ConnectED - Gamified Learning platform
 
 ConnectED Platform
 ConnectED is a next-generation collaborative platform designed to empower students and mentors through guided, project-based learning. It seamlessly blends innovation, communication, and tracking into one powerful tool, supporting the full journey from ideation to patent filing.
