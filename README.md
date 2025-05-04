@@ -14,6 +14,8 @@ Key Features
 
 * Calendly Integration for effortless mentor scheduling and availability syncing.
 
+* Created a private chat room for mentors and mentees to communicate securely and collaborate effectively.
+
 * Team & Individual Work Tracking with visual intensity maps inspired by LeetCode.
 
 * Voice Bot Assistant for help, navigation, and engagement.
@@ -23,6 +25,7 @@ Key Features
 * Augmented Reality (AR) modules for interactive, immersive learning.
 
 * Patent Application Support using WIPO & IPO keyword matching tools.
+
 
 Whether you're building the next big innovation or learning from experienced mentors, ConnectED brings everything you need under one violet-themed, modern, and secure platform.
 
