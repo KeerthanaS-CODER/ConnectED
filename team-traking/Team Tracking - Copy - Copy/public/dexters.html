@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEXTERS - Team Tracking</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1 class="glow">Team Tracking System</h1>
+        <!-- Points (Coins) Display -->
+        <div class="points-container">
+            <div class="loader"></div>
+            <span id="points">0</span>
+        </div>
+    </header>
+    <main>
+        <section id="milestone-snake">
+            <!-- Snake representation will be loaded here -->
+        </section>
+        <section id="team-info">
+            <h2 class="glow">Team Information</h2>
+            <div id="team-data">
+                <!-- Team data will be loaded here -->
+            </div>
+        </section>
+    </main>
+    <script>
+        // Function to fetch team data
+        async function fetchTeamData(teamName) {
+            try {
+                const response = await fetch(`/team/${teamName}`);
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                displayMilestoneSnake(data.milestones);
+                displayTeamData(data);
+                updatePoints(data.milestones); // Update points based on milestones
+            } catch (error) {
+                console.error('Error fetching team data:', error);
+            }
+        }
+
+        // Function to update points based on milestones
+        function updatePoints(milestones) {
+            const pointsPerMilestone = 500;
+            let pointsEarned = 0;
+
+            milestones.forEach(milestone => {
+                if (milestone.completed) {
+                    pointsEarned += pointsPerMilestone;
+                }
+            });
+
+            // Update the points display in the HTML
+            const pointsDisplay = document.getElementById('points');
+            pointsDisplay.textContent = pointsEarned;
+        }
+
+        // Function to display milestone snake
+        function displayMilestoneSnake(milestones) {
+            const snakeSection = document.getElementById('milestone-snake');
+            const milestoneHeadLabels = ['M1', 'M2', 'M3'];
+            let snakeHtml = '<div class="snake-container">';
+
+            milestones.forEach((milestone, index) => {
+                const colorClass = milestone.completed ? 'completed' : 'incomplete';
+                snakeHtml += `<div class="snake-segment ${colorClass}" data-label="${milestoneHeadLabels[index]}"></div>`;
+            });
+
+            snakeHtml += '</div>';
+            snakeSection.innerHTML = snakeHtml;
+        }
+
+        // Function to determine intensity class based on hours
+        function getIntensityClass(hours) {
+            if (hours < 5) return 'intensity-low';
+            if (hours < 7) return 'intensity-medium';
+            return 'intensity-high';
+        }
+
+        // Function to display team data
+        function displayTeamData(data) {
+            const teamDataDiv = document.getElementById('team-data');
+            teamDataDiv.innerHTML = `
+                <div class="team-card">
+                    <h3 class="glow">Team Name: ${data.teamName}</h3>
+                    <h4 class="glow">Mentor: ${data.mentor.name}</h4>
+                    <p class="glow">Milestones: ${data.milestones.map(ms => `Milestone ${ms.milestone}: ${ms.completed ? 'Completed' : 'Incomplete'}`).join(', ')}</p>
+                    <p class="glow">Work Hours: ${data.workHours.map(wh => `Date: ${wh.date}, Hours: ${wh.hours}`).join(', ')}</p>
+                    <h4 class="glow">Students:</h4>
+                    <div class="team-members">
+                        ${data.students.map(student => `<div class="member-container student"><p class="${getIntensityClass(student.progress.hours)} glow">${student.name} - Milestone ${student.progress.milestone}, Hours: ${student.progress.hours}</p></div>`).join('')}
+                    </div>
+                    <div class="team-members">
+                        <div class="member-container mentor"><p class="glow">${data.mentor.name}</p></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Load data for DEXTERS team on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchTeamData('DEXTERS');
+        });
+    </script>
+</body>
+</html>

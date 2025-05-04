@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectED - Create Program</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oregano:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0f2f5, #e0e4ec);
+            color: #333;
+            height: 100vh;
+            display: flex;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background: #1e1e2f;
+            padding: 20px;
+            gap: 20px;
+            width: 220px;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            background: #33344e;
+        }
+
+        .sidebar i {
+            font-size: 18px;
+        }
+        .title {
+            font-family: 'Oregano', cursive;
+            font-size: 32px;
+            font-weight: bold;
+            color: #2c003e;
+        }
+        .main-content {
+            padding: 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto; /* Enables vertical scrolling */
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-weight: 600;
+            font-size: 24px;
+        }
+
+        .header input[type="search"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .header i {
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background: #1e1e2f;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 1000px; /* Increased form width */
+            margin-left:200px;
+            color: #faf8f8;
+            height: auto; /* Allows form to adjust in height */
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            color:#1e1e2f;
+            border: none;
+        }
+
+        button {
+            display: inline-block;
+            background-color: #2C003E;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #572F91;
+        }
+
+        /* Ensures container has a vertical scroll if content exceeds */
+        .main-content {
+            overflow-y: auto;
+            max-height: calc(100vh - 80px); /* Adjust based on header height */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <a href="http://127.0.0.1:5000/booking"><i class="fas fa-home"></i> Home</a>
+            <a href="http://127.0.0.1:5002/mentor"><i class="fas fa-desktop"></i> Mentor Space</a>
+            <a href="http://localhost:3011/"><i class="fas fa-comments"></i> Community</a>
+            <a href="https://calendly.com/jagancool61"><i class="fas fa-calendar-alt"></i> Book a Call</a>
+            <a href="https://rasuchan.github.io/WebRTC/ConnectED_starter/lobby.html"><i class="fas fa-clapperboard"></i> Meet Room</a>
+            <a href="http://127.0.0.1:5005"><i class="fas fa-laptop-code"></i> Video Room</a>
+            <a href="http://127.0.0.1:1010"><i class="fas fa-microphone"></i> Voice Assistance</a>
+        </div>        
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h1 class="title">ConnectED</h1>
+                <input type="search" placeholder="Search..." style="width: 70%;">
+                <i class="fas fa-user-circle"></i>
+            </header>
+
+            <!-- Form Section -->
+            <h1>Create a Program</h1>
+            <form action="/mentor" method="POST">
+                <label for="program_name">Program Name:</label>
+                <input type="text" name="program_name" required>
+
+                <label for="category">Category:</label>
+                <select name="category" id="category">
+                    <option value="WebDevelopment">Web Development</option>
+                    <option value="DataScience">Data Science</option>
+                    <option value="AIML">AI & ML</option>
+                    <option value="Cybersecurity">Cyber Security</option>
+                    <option value="Cloudcomputing">Cloud Computing</option>
+                    <option value="DM">Digital Marketing</option>
+                    <option value="UIUX">UI/UX Design</option>
+                    <option value="BC">Blockchain Technology</option>
+                    <option value="App">Mobile App Development</option>
+                    <option value="PM">Project Management</option>                    
+                </select>
+
+                <label for="duration">Duration:</label>
+                <input type="text" name="duration" required>
+
+                <label for="available_slots">Available Slots:</label>
+                <input type="number" name="available_slots" required>
+
+                <label for="overview">Overview:</label>
+                <textarea name="overview" required></textarea>
+
+                <label for="learning_path">Learning Path:</label>
+                <textarea name="learning_path" required></textarea>
+
+                <label for="highlights">Program Highlights:</label>
+                <textarea name="highlights" required></textarea>
+
+                <label for="preliminary_domains">Preliminary Domains:</label>
+                <textarea name="preliminary_domains" required></textarea>
+
+                <label for="supplemented_domains">Supplemented Domains:</label>
+                <textarea name="supplemented_domains" required></textarea>
+
+                <label for="requirements">Program Requirements:</label>
+                <textarea name="requirements" required></textarea>
+
+                <label for="deadline">Deadline:</label>
+                <input type="date" name="deadline" required>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

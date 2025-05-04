@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectED</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oregano:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: url("bg.png");
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            background-image: linear-gradient(black, #2B053E);
+            border: solid white 1px;
+            padding: 20px 0;
+            gap: 20px;
+            width: 80px;
+        }
+
+        .sidebar-btn {
+            background: transparent;
+            border: none;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .sidebar-btn:hover {
+            background: linear-gradient(to right, #d53369, #daae51);
+            border-radius: 50%;
+            transform: scale(1.2);
+        }
+
+        .title {
+            font-size: 150px;
+            font-family: 'Oregano', cursive;
+            font-weight: bold;
+            color: white;
+        }
+
+        .main-content {
+            padding: 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-image: linear-gradient(black, #231769);
+            border: solid white 1px;
+            padding: 20px;
+        }
+
+        .header h1 {
+            font-weight: 600;
+            font-size: 24px;
+        }
+
+        .header input[type="search"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .header i {
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* Courses Container */
+        .courses-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px 0;
+            height: calc(100vh - 100px); /* Adjust height to fit screen */
+            overflow-y: auto; /* Enable scrolling inside this container */
+        }
+
+        /* Course Card */
+        .course-card {
+            background-color: #3a2b5e7b;
+            border: solid white 1px;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            align-items: center; /* Ensure items are vertically aligned */
+            gap: 20px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer; /* Make it look clickable */
+            transition: background 0.3s ease-in-out; /* Smooth transition for background */
+            text-decoration: none; /* Remove underline on anchor tags */
+        }
+
+        /* Hover Effect for Course Card */
+        .course-card:hover {
+            background: linear-gradient(to right, #d53369, #daae51); /* Linear gradient on hover */
+        }
+
+        /* Course Info Container: Make image and details side by side */
+        .course-info {
+            display: flex;
+            align-items: center; /* Align items vertically */
+            gap: 20px; /* Space between image and text */
+        }
+
+        /* Mentor Image */
+        .mentor-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* Course Details: Allow it to take up remaining space */
+        .course-details {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex-grow: 1; /* Ensure the details expand to fill the available space */
+        }
+
+        .course-details h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .course-details p {
+            font-size: 14px;
+            color: #d3cdea;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+            font-family: Outfit;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Section -->
+        <div class="sidebar">
+            <button class="sidebar-btn"><i class="fas fa-home"></i></button>
+            <button class="sidebar-btn"><i class="fas fa-desktop"></i></button>
+            <button class="sidebar-btn"><i class="fas fa-comments"></i></button>
+            <button class="sidebar-btn"><i class="fas fa-calendar-alt"></i></button>
+        </div>
+
+        <!-- Main Content Section -->
+        <div class="main-content">
+            <!-- Header Section -->
+            <header class="header">
+                <h1 class="title">ConnectED</h1>
+                <input type="search" placeholder="Search..." size="100px">
+                <i class="fas fa-user-circle"></i>
+            </header> 
+
+            <div class="courses-container">
+                <!-- Course 1 -->
+                <h2>Web Development</h2>
+                <a href="Course1.html" class="course-card">
+                    <div class="course-info">
+                        <div class="course-img">
+                            <img src="Andrew.png" alt="Vishnuvasan T S" class="mentor-image">
+                        </div>
+                        <div class="course-details">
+                            <h3>Basic Web Development using HTML, CSS and JS</h3>
+                            <p>Duration: 3 months</p>
+                            <p>Mentor: Andrew Marel</p>
+                            <p>Problem Statement:Develop a simple static website (related to blogs of your choice) using html,css and js tags</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Course 2 -->
+                <a href="course2.html" class="course-card">
+                    <div class="course-info">
+                        <div class="course-img">
+                            <img src="Grandy.png" alt="Grandy Moss" class="mentor-image">
+                        </div>
+                        <div class="course-details">
+                            <h3>Become web developer using latest tech stack</h3>
+                            <p>Duration: 6 months</p>
+                            <p>Mentor: Grandy Moss</p>
+                            <p>Problem Statement:Develop a full-stack web application using modern technologies like React, Node.js, and MongoDB, ensuring optimized performance and scalability.</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Course 3 -->
+                <a href="course3.html" class="course-card">
+                    <div class="course-info">
+                        <div class="course-img">
+                            <img src="Brad.png" alt="Brad Dock" class="mentor-image">
+                        </div>
+                        <div class="course-details">
+                            <h3>Getting ready with HTML and CSS</h3>
+                            <p>Duration: 1 month</p>
+                            <p>Mentor: Brad Dock</p>
+                            <p>Create a responsive, visually appealing website using advanced HTML5 and CSS3 features, implementing layout techniques like Flexbox and Grid.</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="course4.html" class="course-card">
+                    <div class="course-info">
+                        <div class="course-img">
+                            <img src="Jody.png" alt="Andrew Williams" class="mentor-image">
+                        </div>
+                        <div class="course-details">
+                            <h3>Complete REACT Developer</h3>
+                            <p>Duration: 4 months</p>
+                            <p>Mentor: Andrew Williams</p>
+                            <p>Build a dynamic and interactive single-page application (SPA) using React, focusing on state management, component design, and API integration.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+# Ignore virtual environments and system files
+.venv/
+.vs/
+.vscode/
+__pycache__/
+*.pyc
+
+# Node dependencies
+node_modules/
+
+# Ignore OS & log files
+.DS_Store
+Thumbs.db
+
+# Ignore uploads if temporary
+uploads/
+
+# Optional: ignore resume files
+resume/
+
+# Ignore generated PDFs if not source
+*.pdf

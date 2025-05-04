@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-image: url("/static/img.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: relative;
+    }
+
+    .login-container {
+      background:#12121266;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
+      width: 350px;
+      text-align: center;
+      transition: all 0.5s ease;
+    }
+
+    .login-container h2 {
+      color: white;
+      margin-bottom: 30px;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .btn-group button {
+      background-color: #FF5733;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      width: 48%;
+    }
+
+    .btn-group button:hover {
+      background-color: #ff4733;
+    }
+
+    .form-container {
+      display: none;
+      transition: all 0.3s ease;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .form-container input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    .form-container .login-btn {
+      background-color: #FF5733;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      width: 100%;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .form-container .login-btn:hover {
+      background-color: #ff4733;
+    }
+
+    .social-login {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .social-login img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .large-google {
+      width: 100px;
+      height: 50px;
+    }
+
+    .signup-link {
+      margin-top: 20px;
+      color: white;
+      font-size: 14px;
+    }
+
+    .signup-link a {
+      color: #4818cd;
+      text-decoration: none;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+
+    /* Translate button styles */
+    .translate-btn {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background-color: #FF5733;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
+    }
+
+    .translate-btn:hover {
+      background-color: #ff4733;
+    }
+
+    .translate-btn img {
+      width: 24px;
+      height: 24px;
+    }
+
+  </style>
+  <script>
+    let isEnglish = true; // Variable to track the current language
+
+    // English and Punjabi translations
+    const translations = {
+      "Log In": {
+        en: "Log In",
+        pa: "ਲਾਗਿਨ"
+      },
+      "Congratulations! Your email has been verified. You can now log in.": {
+        en: "Congratulations! Your email has been verified. You can now log in.",
+        pa: "ਮੁਬਾਰਕਾਂ! ਤੁਹਾਡੀ ਈਮੇਲ ਦੀ ਪੜਤਾਲ ਹੋ ਚੁਕੀ ਹੈ। ਤੁਸੀਂ ਹੁਣ ਲਾਗਿਨ ਕਰ ਸਕਦੇ ਹੋ।"
+      },
+      "Mentee": {
+        en: "Mentee",
+        pa: "ਮੰਟੀ"
+      },
+      "Mentor": {
+        en: "Mentor",
+        pa: "ਮੈਂਟਰ"
+      },
+      "Mentee Email": {
+        en: "Mentee Email",
+        pa: "ਮੰਟੀ ਈਮੇਲ"
+      },
+      "Mentee Password": {
+        en: "Mentee Password",
+        pa: "ਮੰਟੀ ਪਾਸਵਰਡ"
+      },
+      "Mentor Email": {
+        en: "Mentor Email",
+        pa: "ਮੈਂਟਰ ਈਮੇਲ"
+      },
+      "Mentor Password": {
+        en: "Mentor Password",
+        pa: "ਮੈਂਟਰ ਪਾਸਵਰਡ"
+      },
+      "Don't have an account?": {
+        en: "Don't have an account?",
+        pa: "ਕੀ ਤੁਹਾਡਾ ਖਾਤਾ ਨਹੀਂ ਹੈ?"
+      },
+      "Sign Up": {
+        en: "Sign Up",
+        pa: "ਸਾਈਨ ਅਪ"
+      }
+    };
+
+    // Toggle between mentor and mentee form
+    function showForm(type) {
+      document.getElementById('menteeForm').classList.remove('active');
+      document.getElementById('mentorForm').classList.remove('active');
+
+      if (type === 'mentee') {
+        document.getElementById('menteeForm').classList.add('active');
+      } else {
+        document.getElementById('mentorForm').classList.add('active');
+      }
+    }
+
+    // Function to toggle language
+    function toggleLanguage() {
+      const elements = document.querySelectorAll('.login-container h2, .login-container p, .btn-group button, .form-container input, .signup-link, .signup-link a');
+
+      elements.forEach(function (element) {
+        let text = element.textContent || element.placeholder;
+        Object.keys(translations).forEach(function (key) {
+          if (text === translations[key].en || text === translations[key].pa) {
+            if (element.tagName.toLowerCase() === 'input') {
+              element.placeholder = isEnglish ? translations[key].pa : translations[key].en;
+            } else {
+              element.textContent = isEnglish ? translations[key].pa : translations[key].en;
+            }
+          }
+        });
+      });
+
+      isEnglish = !isEnglish; // Toggle the language state
+    }
+  </script>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>Log In</h2>
+    <p style="color:aliceblue">Congratulations! Your email has been verified. You can now log in.</p>
+    <div class="btn-group">
+      <button onclick="showForm('mentee')">Mentee</button>
+      <button onclick="showForm('mentor')">Mentor</button>
+    </div>
+
+    <div id="menteeForm" class="form-container active">
+      <form action="/login_user" method="post">
+        <input type="email" id="email" name="email" placeholder="Mentee Email" required>
+        <input type="password" id="password" name="password" placeholder="Mentee Password" required>
+        <button class="login-btn" type="submit">Log In</button>
+      </form>
+    </div>
+
+    <div id="mentorForm" class="form-container">
+      <form action="/login_user" method="post">
+        <input type="email" id="email" name="email" placeholder="Mentor Email" required>
+        <input type="password" id="password" name="password" placeholder="Mentor Password" required>
+        <button class="login-btn" type="submit">Log In</button>
+      </form>
+    </div>
+
+    <div class="social-login">
+      <img src="https://img.icons8.com/color/96/000000/google-logo.png" alt="Google" class="large-google">
+    </div>
+
+    <div class="signup-link">
+      Don't have an account? <a href="/">Sign Up</a>
+    </div>
+  </div>
+
+  <!-- Translate button -->
+  <button class="translate-btn" onclick="toggleLanguage()">
+    <i class="material-icons">translate</i>
+  </button>
+
+</body>
+</html>

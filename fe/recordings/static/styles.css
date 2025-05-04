@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #e8d8d8;
+    padding: 20px;
+    background-color: #2e1a47; /* Dark violet background */
+    overflow: auto; /* Enable scrolling */
+    position: relative;
+    height: 100vh; /* Ensure body takes full height */
+}
+
+/* Fixed Sparkle Container */
+.sparkle-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events:fill; /* Make sure it doesn't interfere with clicking */
+    overflow: hidden;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: rgba(60, 35, 75, 0.9); /* Slightly transparent darker container */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px); /* Blur effect for modern feel */
+    position: relative; /* Make sure it appears above sparkles */
+    z-index: 1; /* Ensure it’s above the sparkle background */
+}
+
+h1, h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.filter-section, .add-video-section {
+    margin-bottom: 40px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+select, input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s;
+    background-color: #3c2b56; /* Darker input fields */
+    color: #e8d8d8; /* Light text for inputs */
+}
+
+select:focus, input:focus {
+    border-color: #6a3e8a;
+    outline: none;
+}
+
+button {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #6a3e8a; /* Button color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #5e3485; /* Darker button on hover */
+    transform: scale(1.05);
+}
+
+.video-list {
+    margin-bottom: 40px;
+}
+
+.videoItem {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.videoItem:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.videoItem h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #fff;
+}
+
+.videoItem p {
+    margin-bottom: 5px;
+}
+
+.videoItem a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.videoItem a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.add-video-section form {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-video-section form input {
+    margin-bottom: 10px;
+}
+
+/* Sparkles Animation */
+.sparkle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    animation: sparkle 1.5s infinite alternate;
+}
+
+@keyframes sparkle {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-20px) scale(0.7);
+        opacity: 0;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1, h2 {
+        font-size: 1.5em;
+    }
+}

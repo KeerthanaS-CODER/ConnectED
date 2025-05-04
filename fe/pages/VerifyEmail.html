@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Email</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-image: url("/static/img.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .verify-container {
+      background: #000000;
+      opacity: 100%;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 15px rgb(0, 0, 0);
+      width: 350px;
+      text-align: center;
+      transition: all 0.5s ease;
+    }
+
+    .verify-container h2 {
+      color: white;
+      margin-bottom: 30px;
+    }
+
+    .form-container {
+      display: block;
+      transition: all 0.3s ease;
+    }
+
+    .form-container input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    .form-container .verify-btn {
+      background-color: #9516de;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      width: 100%;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .form-container .verify-btn:hover {
+      background-color: #4818cd;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="verify-container">
+    <h2>Verify Email</h2>
+    <h4 style="color:beige">We have sent an OTP code to your email</h4>
+    <div id="Form" class="form-container active">
+      <form action="/verify_otp" method="post">
+        <input type="text" name="otp" id="otp" placeholder="Enter OTP" required>
+        <button type="submit" class="verify-btn">Verify</button>
+      </form>
+    </div>
+
+   
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </div>
+
+</body>
+</html>

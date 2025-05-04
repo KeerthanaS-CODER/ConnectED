@@ -1,0 +1,129 @@
+/* Global styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    background: linear-gradient(45deg, #000033, #800080); /* Background gradient */
+    overflow: hidden;
+}
+
+/* Glowing Animation */
+@keyframes glowing {
+    0% { text-shadow: 0 0 10px #FF5733, 0 0 20px #FF5733, 0 0 30px #FF5733; }
+    50% { text-shadow: 0 0 20px #FF5733, 0 0 30px #FF5733, 0 0 40px #FF5733; }
+    100% { text-shadow: 0 0 10px #FF5733, 0 0 20px #FF5733, 0 0 30px #FF5733; }
+}
+
+/* Shine Animation */
+@keyframes shine {
+    0% {
+        background-position: -200px;
+    }
+    100% {
+        background-position: 200px;
+    }
+}
+
+/* Container */
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    color: white;
+    position: relative;
+    animation: shine 2s infinite ease-in-out; /* Lighting effect */
+    background: linear-gradient(45deg, #000033, #800080);
+}
+
+/* Left section (Text) */
+.left-section {
+    flex: 1;
+    padding: 20px;
+}
+
+.left-section h1 {
+    font-size: 3rem;
+}
+
+.left-section .tagline {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.left-section .quote {
+    font-style: italic;
+    color: #f0f0f0;
+    margin-bottom: 30px;
+}
+
+/* Animating the text */
+.animated-text {
+    animation: glowing 2s ease-in-out infinite;
+}
+
+/* Button styles */
+.cta-btn {
+    background-color: #FF5733;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Right section (Team Image) */
+.right-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.team-image {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    width: 90%;
+    height: auto;
+}
+
+/* Login/Signup Page */
+.login-page {
+    display: none;
+    height: 100vh;
+    background: linear-gradient(45deg, #000033, #800080);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-page h1 {
+    font-family: 'Oregano', sans-serif;
+    font-size: 5rem;
+    color: #fff;
+    text-shadow: 2px 2px 8px #FF5733;
+}
+
+.login-page .intro-text {
+    font-size: 1.8rem;
+    color: #FFF;
+    margin-bottom: 20px;
+}
+
+.login-page .description {
+    font-size: 1.2rem;
+    color: #f0f0f0;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-btn {
+    background-color: #FF5733;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 20px;
+}

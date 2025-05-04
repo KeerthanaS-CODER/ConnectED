@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectED</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oregano:ital@0;1&display=swap" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #2C003E, #572F91);
+            color: #fff;
+            height: 100vh;
+            display: flex;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            background-image: url("bg.png");
+            overflow: hidden;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            background-image: linear-gradient(black,#2B053E);
+            border:solid white 1px;
+            padding: 20px 0;
+            gap: 20px;
+            width: 80px;
+        }
+
+        .sidebar-btn {
+            background: transparent;
+            border: none;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .sidebar-btn:hover {
+            background: linear-gradient(to right, #d53369, #daae51);
+            border-radius: 50%;
+            transform: scale(1.2);
+        }
+        .title{
+            size: 150px;
+            font-family: 'Oregano',cursive;
+            font-weight: bold;
+            color: white;
+        }
+        .main-content {
+            padding: 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-image: linear-gradient(black,#231769);
+            border:solid white 1px;
+            padding: 20px;
+        }
+
+        .header h1 {
+            font-weight: 600;
+            font-size: 24px;
+        }
+
+        .header input[type="search"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .header i {
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            border-radius: 10px;
+            margin: 20px 0; 
+            position: relative;
+            height: 200px;
+        }
+
+        .carousel-inner {
+            display: flex;
+            animation: slide 25s linear infinite;
+            gap: 20px; 
+            padding: 0 20px; 
+        }
+
+        .slide {
+            min-width: 100%;
+            padding: 40px;
+            background-color: #fff;
+            color: #000;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            margin-right: 20px; 
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            20% { transform: translateX(0); }
+            33% { transform: translateX(-120%); }
+            53% { transform: translateX(-120%); }
+            66% { transform: translateX(-240%); }
+            86% { transform: translateX(-240%); }
+            100% { transform: translateX(0); }
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        a{
+            text-decoration: none;
+            color:white;
+        }
+        .domains {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            justify-items: center;
+            overflow: auto;
+        }
+
+        .domain-btn {
+            color: #fff;
+            width: 100%;
+            padding: 15px;
+            background: #030203;
+            border:solid white 1px;;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-weight: bold;
+            text-align: center;
+            transition: background 0.3s ease, transform 0.3s ease;
+            height: 60px; 
+        }
+
+        .domain-btn:hover {
+            background: linear-gradient(135deg, #4B0082, #FF00FF);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+       
+        <div class="sidebar">
+            <button class="sidebar-btn"><i class="fas fa-home"></i></button>
+            <button class="sidebar-btn"><a href="http://127.0.0.1:5002/mentor"><i class="fas fa-desktop"></i></a></button>
+            <button class="sidebar-btn"><i class="fas fa-comments"></i></button>
+            <button class="sidebar-btn"><a href="https://calendly.com/jagancool61"><i class="fas fa-calendar-alt"></i></a></button>
+            <button class="sidebar-btn"><a href="http://127.0.0.1:5005"><i style='font-size:24px' class='fas'>&#xf03d;</i></a></button>
+        </div>
+
+        
+        <div class="main-content">
+            
+            <header class="header">
+                <h1 class="title">ConnectED</h1>
+                <input type="search" placeholder="Search..." size="100px">
+                <a href="http://127.0.0.1:5001"><i class="fas fa-user-circle"></i></a>
+            </header>
+
+            <div class="carousel">
+                <div class="carousel-inner">
+                    <div class="slide"><a href="/pages/patent.html"><img src="patent.png" alt="patent" width="100%" height="300%"></a></div>
+                    <div class="slide"><img src="i.png" alt="patent" width="100%" height="300%"></div>
+                    <div class="slide"><img src="j.png" alt="patent" width="100%" height="300%"></div>
+                    <div class="slide"><img src="patent.png" alt="patent" width="100%" height="300%"></div> <!-- Repeat for cyclic animation -->
+                    <div class="slide"><img src="i.png" alt="patent" width="100%" height="300%"></div>
+                    <div class="slide"><img src="j.png" alt="patent" width="100%" height="300%"></div>
+                </div>
+            </div>
+
+            
+            <h2>Available Domains</h2>
+            <div class="domains">
+                <button class="domain-btn"><a href="/pages/WebDevelopment.html">Kayachikitsa (General Medicine)</a></button>
+                <button class="domain-btn">Shalaya Tantra (Surgery)</button>
+                <button class="domain-btn">Shalakya Tantra (ENT and Ophthamlmology)</button>
+                <button class="domain-btn">Kaumarbhritya (Pediatrics and Obstetrics)</button>
+                <button class="domain-btn">Rasayana (Rejuvenation and Geriatrics)</button>
+                <button class="domain-btn">Vajikarna (Reproductive Health and Aphrodisiacs)</button>
+                <button class="domain-btn">Panchakarma (Detoxification and Cleansing)</button>
+                <button class="domain-btn">Agada Tantra (Toxicology)</button>
+                <button class="domain-btn">Bhutavidya (Psychiatry and Mental Health)</button>
+                <button class="domain-btn">Swasthavritta (Preventive Medicine and Hygiene)</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

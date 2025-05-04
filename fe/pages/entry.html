@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectED Landing Page</title>
+    <!-- Font for Oregano -->
+    <link href="https://fonts.googleapis.com/css2?family=Oregano&display=swap" rel="stylesheet">
+    <!-- Link to external CSS -->
+    <style>
+        /* Global styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    background: linear-gradient(45deg, #02020c, #efe9ef); /* Background gradient */
+    overflow: hidden;
+}
+
+/* Container */
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    color: white;
+    position: relative;
+    z-index: 2; /* Ensure container content is above background */
+    background: linear-gradient(45deg, #90, #47b17f);
+    background-size: cover;
+}
+
+/* Left section (Text) */
+.left-section {
+    flex: 1;
+    padding: 20px;
+}
+
+.left-section h1 {
+    font-size: 1.9rem;
+}
+
+.left-section .tagline {
+    font-size: 6.8rem;
+    margin: 10px 0;
+}
+
+.left-section .quote {
+    font-style: italic;
+    color: #f0f0f0;
+    margin-bottom: 30px;
+}
+
+/* Animating the text */
+.animated-text {
+    animation: glowing 2s ease-in-out infinite;
+    font: size 13px;
+}
+
+/* Glowing Animation */
+@keyframes glowing {
+    0% { text-shadow: 0 0 10px #FF5733, 0 0 20px #FF5733, 0 0 30px #FF5733; }
+    50% { text-shadow: 0 0 20px #FF5733, 0 0 30px #FF5733, 0 0 40px #FF5733; }
+    100% { text-shadow: 0 0 10px #FF5733, 0 0 20px #FF5733, 0 0 30px #FF5733; }
+}
+
+/* Button styles */
+.cta-btn {
+    background-color: #FF5733;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Right section (Team Image) */
+.right-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.team-image {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    width: 90%;
+    height: auto;
+}
+
+/* log Page */
+.log-page {
+    display: none;
+    height: 100vh;
+    background: linear-gradient(45deg, #6464e2, #ffffff);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.log-page h1 {
+    font-family: 'Oregano', sans-serif;
+    font-size: 5rem;
+    color: #fff;
+    text-shadow: 2px 2px 8px #FF5733;
+}
+
+.log-page .intro-text {
+    font-size: 1.8rem;
+    color: #FFF;
+    margin-bottom: 20px;
+}
+
+.log-page .description {
+    font-size: 1.2rem;
+    color: #f0f0f0;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.log-btn {
+    background-color: #FF5733;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    cursor: pointer; /* Make sure the cursor changes to a pointer on hover */
+}
+/* Static Background */
+.animated-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1; /* Place it behind the content */
+}
+
+.bubble {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+}
+
+/* Different sizes for the static bubbles */
+.bubble1 {
+    width: 100px;
+    height: 100px;
+    top: 10%;
+    left: 20%;
+}
+
+.bubble2 {
+    width: 150px;
+    height: 150px;
+    top: 40%;
+    left: 50%;
+}
+
+.bubble3 {
+    width: 200px;
+    height: 200px;
+    top: 70%;
+    left: 80%;
+}
+
+.bubble4 {
+    width: 80px;
+    height: 80px;
+    top: 30%;
+    left: 90%;
+}
+
+.bubble5 {
+    width: 120px;
+    height: 120px;
+    top: 60%;
+    left: 10%;
+}
+
+/* Style for "Game begins..." text */
+/* Style for "Game begins..." text */
+/* Style for "Game begins..." text */
+.game-begins {
+    font-family: 'Oregano', sans-serif; /* Oregano font */
+    font-size: 12rem; /* Big enough to cover the image area */
+    color: #ffffff; /* White color */
+    text-align: center;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the text */
+    text-shadow: 0 0 10px #FF5733, 0 0 20px #FF5733, 0 0 30px #FF5733; /* Slight orange tint using shadow */
+    animation: shine 1s ease-out forwards, fadeOut 1s ease-out 1s forwards; /* Lighting and fade-out animation */
+    opacity: 1;
+}
+
+/* Shine animation for "Game begins..." */
+@keyframes shine {
+    0% { text-shadow: 0 0 10px #FF5733, 0 0 20px #FF5733, 0 0 30px #FF5733; }
+    50% { text-shadow: 0 0 20px #FF5733, 0 0 30px #FF5733, 0 0 40px #FF5733; }
+    100% { text-shadow: 0 0 10px #FF5733, 0 0 20px #FF5733, 0 0 30px #FF5733; }
+}
+
+/* Fade-out effect */
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+    </style>
+</head>
+<body>
+
+    <!-- Animated background container -->
+    <div class="animated-background">
+        <!-- Bubbles or Stars for animation -->
+        <div class="bubble bubble1"></div>
+        <div class="bubble bubble2"></div>
+        <div class="bubble bubble3"></div>
+        <div class="bubble bubble4"></div>
+        <div class="bubble bubble5"></div>
+    </div>
+
+    <!-- Main landing page -->
+    <div class="container">
+        <div class="left-section">
+            <h1>Welcome to <span class="animated-text">ConnectED!!</span></h1>
+            <p class="tagline">A Gamified Learning Platform</p>
+            <p class="quote">"Empower your learning journey with expert guidance. The future belongs to those who learn more today."</p>
+            <a href="/signup" class="cta-btn">Login</a>
+        </div>
+
+        <div class="right-section">
+            <img src="/static/punjab.jpg" alt="Group of people" class="team-image">
+        </div>
+    </div>
+
+    <!-- log Page - Updated to focus only on log -->
+    </body>
+</html>

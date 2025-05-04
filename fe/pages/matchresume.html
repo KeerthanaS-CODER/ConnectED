@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Description and Resume Matcher</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Job Description and Resume Matcher</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/schedule_resume_parsing">
+                    <div class="form-group">
+                        <label for="job_description">Job Description:</label>
+                        <textarea class="form-control" id="job_description" name="job_description" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="schedule_time">Schedule Time (HH:MM):</label>
+                        <input type="time" class="form-control" id="schedule_time" name="schedule_time" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Schedule Parsing</button>
+                </form>
+
+                <div class="alert alert-info mt-4">
+                    <p id="statusMessage">{{ message }}</p>
+                </div>
+
+                <ul id="resultsList" class="list-group mt-3">
+                    {% if top_resumes %}
+                        {% for i in range(top_resumes|length) %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <strong>{{ top_resumes[i] }}</strong>
+                                <span class="badge badge-success">{{ similarity_scores[i] }}%</span>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to poll for updated results
+        function pollResults() {
+            $.ajax({
+                url: '/get_results',
+                type: 'GET',
+                success: function(data) {
+                    // Update status message
+                    $('#statusMessage').text(data.message);
+
+                    // Clear existing results
+                    $('#resultsList').empty();
+
+                    // Add new results if available
+                    if (data.top_resumes && data.top_resumes.length > 0) {
+                        data.top_resumes.forEach((resume, index) => {
+                            const score = data.similarity_scores[index];
+                            const listItem = `
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>${resume}</strong>
+                                    <span class="badge badge-success">${score}%</span>
+                                </li>`;
+                            $('#resultsList').append(listItem);
+                        });
+                    }
+                },
+                error: function(err) {
+                    console.error('Error fetching results:', err);
+                }
+            });
+        }
+
+        // Poll every 5 seconds
+        setInterval(pollResults, 5000);
+
+        // Run once immediately to display initial results
+        pollResults();
+    </script>
+</body>
+</html>

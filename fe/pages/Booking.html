@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ConnectED</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Oregano:ital@0;1&display=swap" rel="stylesheet"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0f2f5, #e0e4ec);
+            color: #333;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background: #1e1e2f;
+            padding: 20px;
+            gap: 20px;
+            width: 220px;
+            flex-shrink: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            background: #33344e;
+        }
+
+        .sidebar i {
+            font-size: 18px;
+        }
+
+        .main-content {
+            padding: 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            min-height: 100vh;
+            margin-left: 220px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .title {
+            font-family: 'Oregano', cursive;
+            font-size: 32px;
+            font-weight: bold;
+            color: #2c003e;
+        }
+
+        .header input[type="search"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .header i {
+            font-size: 28px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #1f1f2e;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            margin: 30px 0;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: #2a2a3a;
+            color: #fff;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: white;
+            background: rgba(0, 0, 0, 0.4);
+            border: none;
+            padding: 0 15px;
+            cursor: pointer;
+            z-index: 2;
+            transition: background 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .nav-btn.left {
+            left: 10px;
+        }
+
+        .nav-btn.right {
+            right: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .domains {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            margin-top: 10px;
+            justify-items: stretch;
+            align-items: stretch;
+            padding: 0 20px;
+            margin-bottom: 30px;
+        }
+
+        .domain-btn {
+            color: #fff;
+            background: #33344e;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+            width: 100%;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .domain-btn a {
+            color: white;
+            text-decoration: none;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .domain-btn:hover {
+            background: linear-gradient(135deg, #4B0082, #FF00FF);
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 1024px) {
+            .domains {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .domains {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2px;
+            }
+
+            .domain-btn {
+                height: 120px;
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .carousel {
+                height: 200px;
+            }
+
+            .sidebar {
+                width: 200px;
+            }
+
+            .main-content {
+                margin-left: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .domains {
+                grid-template-columns: repeat(1, 1fr);
+                gap: 2px;
+            }
+
+            .sidebar {
+                width: 180px;
+            }
+
+            .main-content {
+                margin-left: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <a href="http://127.0.0.1:5000/booking"><i class="fas fa-home"></i> Home</a>
+            <a href="http://127.0.0.1:5002/mentor"><i class="fas fa-desktop"></i> Mentor Space</a>
+            <a href="http://127.0.0.1:3011"><i class="fas fa-comments"></i> Community</a>
+            <a href="https://calendly.com/jagancool61"><i class="fas fa-calendar-alt"></i> Book a Call</a>
+            <a href="https://rasuchan.github.io/WebRTC/ConnectED_starter/lobby.html"><i class="fas fa-clapperboard"></i> Meet Room</a>
+            <a href="http://127.0.0.1:5005"><i class="fas fa-laptop-code"></i> Video Room</a>
+            <a href="http://127.0.0.1:1010"><i class="fas fa-microphone"></i> Voice Assistance</a>
+            <a href="https://rasuchan.github.io/Science--Discovery/Science%20Discovery/copy/new.html"><i class="fas fa-chart-bar"></i> Analysis</a>
+        </div>         
+
+        <!-- Main Content -->
+        <div class="main-content">
+
+            <!-- Header -->
+            <header class="header">
+                <h1 class="title">ConnectED</h1>
+                <input type="search" placeholder="Search..." />
+                <a href="http://127.0.0.1:5001"><i class="fas fa-user-circle"></i></a>
+            </header>
+
+            <!-- Image Slider -->
+            <div class="carousel">
+                <button class="nav-btn left" onclick="prevSlide()">❮</button>
+                <div class="carousel-inner" id="carouselInner">
+                    <div class="slide"><a href="/pages/patent.html"><img src="/static/patent.png" alt="Patent Slide" onerror="this.style.display='none';this.parentElement.textContent='Patent Slide';"></a></div>
+                    <div class="slide"><img src="/static/i.png" alt="Slide 2" onerror="this.style.display='none';this.parentElement.textContent='Slide 2';"></div>
+                    <div class="slide"><img src="/static/j.png" alt="Slide 3" onerror="this.style.display='none';this.parentElement.textContent='Slide 3';"></div>
+                    <div class="slide"><img src="/static/patent.png" alt="Slide 4" onerror="this.style.display='none';this.parentElement.textContent='Slide 4';"></div>
+                </div>
+                <button class="nav-btn right" onclick="nextSlide()">❯</button>
+            </div>
+
+            <!-- Domain Buttons -->
+            <h2>Available Domains</h2>
+            <div class="domains">
+                <button class="domain-btn"><a href="/pages/WebDevelopment.html">Web Development</a></button>
+                <button class="domain-btn">Data Science</button>
+                <button class="domain-btn">Cloud Computing</button>
+                <button class="domain-btn">Cybersecurity</button>
+                <button class="domain-btn">Digital Marketing</button>
+                <button class="domain-btn">UI/UX Design</button>
+                <button class="domain-btn">AI & ML</button>
+                <button class="domain-btn">Mobile App Development</button>
+                <button class="domain-btn">Blockchain Technology</button>
+                <button class="domain-btn">Project Management</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Manual Slider Script -->
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const carouselInner = document.getElementById('carouselInner');
+
+        function updateSlidePosition() {
+            if (totalSlides > 0 && carouselInner) {
+                carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+        }
+
+        function nextSlide() {
+            if (totalSlides > 0) {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                updateSlidePosition();
+            }
+        }
+
+        function prevSlide() {
+            if (totalSlides > 0) {
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                updateSlidePosition();
+            }
+        }
+
+        // Initialize the carousel on page load
+        window.onload = function() {
+            updateSlidePosition();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup Page</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-image:url("/static/img.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .Sign_Up-container {
+      background: #12121266;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
+      width: 350px;
+      text-align: center;
+      transition: all 0.5s ease;
+    }
+
+    .Sign_Up-container h2 {
+      color: white;
+      margin-bottom: 30px;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .btn-group button {
+      background-color: #9516de;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      width: 48%;
+    }
+
+    .btn-group button:hover {
+      background-color: #4818cd;
+    }
+
+    .form-container {
+      display: none;
+      transition: all 0.3s ease;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .form-container input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    .form-container .Sign_Up-btn {
+      background-color: #9516de;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      width: 100%;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .form-container .Sign_Up-btn:hover {
+      background-color: #4818cd;
+    }
+
+    .social-Sign_Up {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .social-Sign_Up img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .large-google {
+      width: 100px;
+      height: 50px;
+    }
+
+    .signup-link {
+      margin-top: 20px;
+      color: white;
+      font-size: 14px;
+    }
+
+    .signup-link a {
+      color: #4818cd;
+      text-decoration: none;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <script>
+    function showForm(type) {
+      document.getElementById('menteeForm').classList.remove('active');
+      document.getElementById('mentorForm').classList.remove('active');
+
+      if (type === 'mentee') {
+        document.getElementById('menteeForm').classList.add('active');
+      } else {
+        document.getElementById('mentorForm').classList.add('active');
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <div class="Sign_Up-container">
+    <h2>Sign Up</h2>
+    <div class="btn-group">
+      <button onclick="showForm('mentee')">Mentee</button>
+      <button onclick="showForm('mentor')">Mentor</button>
+    </div>
+
+    
+    <form id="menteeForm" class="form-container active" action="/send_otp" method="post">
+      <input type="text" placeholder="Mentee Name" required>
+      <input type="email" name="email" id="email" placeholder="Mentee Email" required>
+      <input type="tel" placeholder="Mentee Phone" required>
+      <input type="password" name="password" placeholder="Mentee Password" required>
+      <button type="submit" class="Sign_Up-btn">Sign Up</button>
+    </form>
+
+    
+    <form id="mentorForm" class="form-container" action="/send_otp" method="post">
+      <input type="email" name="email" id="email" placeholder="Mentor Email" required>
+      <input type="password" name="password" id="password" placeholder="Mentor Password" required>
+      <button type="submit" class="Sign_Up-btn">Sign Up</button>
+    </form>
+
+    <div class="signup-link">
+        __________ or else sign-up with_________ 
+      </div>
+    <div class="social-Sign_Up">
+      <img src="https://img.icons8.com/color/96/000000/google-logo.png" alt="Google" class="large-google">
+    </div>
+  </div>
+
+</body>
+</html>

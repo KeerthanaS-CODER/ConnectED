@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectED</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Oregano:ital@0;1&display=swap" rel="stylesheet">
+   <style>
+    * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0f2f5, #e0e4ec);
+            color: #333;
+            height: 100vh;
+            display: flex;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            background-image: url("/static/bg.png");
+            overflow: hidden;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background: #1e1e2f;
+            padding: 20px;
+            gap: 20px;
+            width: 220px;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            background: #33344e;
+        }
+
+        .sidebar i {
+            font-size: 18px;
+        }
+
+        .title{
+            font-family: 'Oregano', cursive;
+            font-size: 32px;
+            font-weight: bold;
+            color: #2c003e;
+        }
+        .main-content {
+            padding: 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: auto;
+        }
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            border-radius: 10px;
+            margin: 20px 0; 
+            position: relative;
+            height: 200px;
+        }
+
+        .carousel-inner {
+            display: flex;
+            animation: slide 25s linear infinite;
+            gap: 20px; 
+            padding: 0 20px; 
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        a{
+            text-decoration: none;
+            color:white;
+        }
+        .domains {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            justify-items: center;
+        }
+
+        .domain-btn {
+            color: #fff;
+            width: 100%;
+            padding: 15px;
+            background: #030203;
+            border:solid white 1px;;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-weight: bold;
+            text-align: center;
+            transition: background 0.3s ease, transform 0.3s ease;
+            height: 60px; 
+        }
+
+        .domain-btn:hover {
+            background: linear-gradient(135deg, #4B0082, #FF00FF);
+            transform: translateY(-5px);
+        }
+        .main-content::-webkit-scrollbar {
+    width: 10px;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+    background-color: #572F91;
+    border-radius: 10px;
+}
+
+.main-content::-webkit-scrollbar-track {
+    background-color: #2C003E;
+}
+
+.profile-section {
+    background-color: #1e1e2f;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid white;
+    color: white;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.profile-section h2 {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.profile-section input, .profile-section textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.profile-section button {
+    padding: 10px;
+    width: 100%;
+    background: linear-gradient(135deg, #4B0082, #FF00FF);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.profile-section button:hover {
+    transform: translateY(-5px);
+    background: linear-gradient(135deg, #d53369, #daae51);
+}
+
+.profile-section img {
+    display: block;
+    margin: 0 auto 20px;
+}
+   </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+                <a href="http://127.0.0.1:5000/booking"><i class="fas fa-home"></i> Home</a>
+                <a href="http://127.0.0.1:5002/mentor"><i class="fas fa-desktop"></i> Mentor Space</a>
+                <a href="http://localhost:3011/"><i class="fas fa-comments"></i> Community</a>
+                <a href="https://calendly.com/jagancool61"><i class="fas fa-calendar-alt"></i> Book a Call</a>
+                <a href="https://rasuchan.github.io/WebRTC/ConnectED_starter/lobby.html"><i class="fas fa-clapperboard"></i> Meet Room</a>
+                <a href="http://127.0.0.1:5005"><i class="fas fa-laptop-code"></i> Video Room</a>
+                <a href="http://127.0.0.1:1010"><i class="fas fa-microphone"></i> Voice Assistance</a> 
+        </div>
+        <div class="main-content">
+            <div class="profile-section">
+                <h2>Edit Profile</h2>
+                <form id="profileForm" method="POST" action="/update-profile" enctype="multipart/form-data">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" value="{{ profile.name }}" required>
+            
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="{{ profile.email }}" readonly>
+            
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone" value="{{ profile.phone }}">
+            
+                    <label for="bio">Bio:</label>
+                    <textarea id="bio" name="bio">{{ profile.bio }}</textarea>
+            
+                    <label for="skills">Skills:</label>
+                    <input type="text" id="skills" name="skills" value="{{ profile.skills }}">
+            
+                    <label for="experience">Experience:</label>
+                    <input type="text" id="experience" name="experience" value="{{ profile.experience }}">
+            
+                    <label for="profile_image">Profile Image:</label>
+                    <input type="file" id="profile_image" name="profile_image" accept="image/*" onchange="previewImage(event)">
+                    
+                    <!-- Current Image -->
+                    <img id="imagePreview" src="/image/{{ profile.email }}" alt="Profile Image Preview" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-top: 10px;">
+            
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+            
+            <script>
+                function previewImage(event) {
+                    const image = document.getElementById('profile_image').files[0];
+                    const imagePreview = document.getElementById('imagePreview');
+                    if (image) {
+                        const reader = new FileReader();
+                        reader.onload = function() {
+                            imagePreview.src = reader.result;
+                            imagePreview.style.display = 'block';
+                        };
+                        reader.readAsDataURL(image);
+                    } else {
+                        imagePreview.src = '/image/{{ profile.email }}';
+                    }
+                }
+            </script>            
+        </div>
+    </div>
+</body>
+</html>

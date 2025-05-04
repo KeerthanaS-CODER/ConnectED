@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Patent Application Tutorial</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      background: #f7f8fa;
+      color: #2a2a2a;
+      padding: 3rem;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .intro-text {
+      font-size: 2em;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: #1a3c5e;
+      text-align: left;
+    }
+
+    .subtext {
+      font-size: 1.1em;
+      color: #5a5a5a;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      position: relative;
+      padding: 1rem 0;
+    }
+
+    .step {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding-left: 1rem;
+      border-left: 2px solid #d0d0d0;
+    }
+
+    .step-circle {
+      width: 20px;
+      height: 20px;
+      background: #1a3c5e;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      transition: background 0.3s ease;
+    }
+
+    .step-label {
+      font-size: 0.95em;
+      font-weight: 500;
+      color: #2a2a2a;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .step-description {
+      font-size: 0.85em;
+      color: #6a6a6a;
+      line-height: 1.4;
+    }
+
+    .step:hover .step-circle {
+      background: #145ea8;
+    }
+
+    .step:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .tooltip {
+      visibility: hidden;
+      opacity: 0;
+      background: #1a3c5e;
+      color: #ffffff;
+      font-size: 0.8em;
+      padding: 0.5rem;
+      border-radius: 4px;
+      position: absolute;
+      top: 50%;
+      left: 50px;
+      transform: translateY(-50%);
+      width: 180px;
+      text-align: center;
+      transition: opacity 0.3s ease;
+      z-index: 2;
+    }
+
+    .tooltip::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: -8px;
+      transform: translateY(-50%);
+      border-width: 8px 8px 8px 0;
+      border-style: solid;
+      border-color: transparent #1a3c5e transparent transparent;
+    }
+
+    .upload-section {
+      background: #ffffff;
+      padding: 2rem;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      max-width: 100%;
+    }
+
+    .upload-section h2 {
+      margin-bottom: 1.25rem;
+      font-weight: 500;
+      font-size: 1.3em;
+      color: #1a3c5e;
+    }
+
+    .upload-section p {
+      color: #5a5a5a;
+      margin-bottom: 1.5rem;
+      font-size: 0.95em;
+      line-height: 1.5;
+    }
+
+    .upload-section input[type="file"] {
+      padding: 0.6rem;
+      margin-bottom: 1.5rem;
+      width: 100%;
+      max-width: 600px;
+      border: 1px solid #d0d0d0;
+      border-radius: 4px;
+      background: #fafafa;
+      color: #2a2a2a;
+      font-size: 0.95em;
+    }
+
+    .upload-section button {
+      padding: 0.75rem 1.5rem;
+      background: #1a3c5e;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 1em;
+      transition: background 0.3s ease;
+    }
+
+    .upload-section button:hover {
+      background: #145ea8;
+    }
+
+    .response-message {
+      margin-top: 1rem;
+      font-size: 0.95em;
+      color: #2a2a2a;
+    }
+
+    .response-message.success {
+      color: #1a3c5e;
+    }
+
+    .response-message.error {
+      color: #d32f2f;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 2rem;
+      }
+
+      .timeline {
+        gap: 1.5rem;
+        padding: 0;
+      }
+
+      .step {
+        padding-left: 0.5rem;
+        gap: 1rem;
+      }
+
+      .tooltip {
+        display: none;
+      }
+
+      .intro-text {
+        font-size: 1.6em;
+      }
+
+      .subtext {
+        font-size: 1em;
+      }
+
+      .upload-section h2 {
+        font-size: 1.2em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="intro-text">Patent Application Tutorial</div>
+    <div class="subtext">
+      This tutorial guides you through the process of submitting a patent application. Follow each step carefully to ensure a complete and accurate submission.
+    </div>
+
+    <div class="timeline">
+      <div class="step">
+        <div class="step-circle"></div>
+        <div>
+          <div class="step-label">Step 1: Log In</div>
+          <div class="step-description">Access your account.</div>
+          <div class="tooltip">Log in using your credentials to access the patent application system.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-circle"></div>
+        <div>
+          <div class="step-label">Step 2: Enter Personal Information</div>
+          <div class="step-description">Provide applicant details.</div>
+          <div class="tooltip">Enter your full name, contact information, and other required personal details.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-circle"></div>
+        <div>
+          <div class="step-label">Step 3: Provide Patent Details</div>
+          <div class="step-description">Describe your invention.</div>
+          <div class="tooltip">Include a detailed description of your invention, including its purpose and functionality.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-circle"></div>
+        <div>
+          <div class="step-label">Step 4: Upload Documents</div>
+          <div class="step-description">Submit required files.</div>
+          <div class="tooltip">Upload all necessary documents, such as patent drawings and specifications.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-circle"></div>
+        <div>
+          <div class="step-label">Step 5: Submit Application</div>
+          <div class="step-description">Finalize and submit.</div>
+          <div class="tooltip">Review all entered information and submit your application for processing.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="upload-section">
+      <h2>Step 4: Upload Required Documents</h2>
+      <p>
+        Please upload all necessary documents, including patent specifications, drawings, and any supporting materials.
+      </p>
+      <input type="file" id="fileInput" multiple />
+      <button type="button" id="uploadButton">Upload Documents</button>
+      <div id="responseMessage" class="response-message"></div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('uploadButton').addEventListener('click', async () => {
+      const fileInput = document.getElementById('fileInput');
+      const responseMessage = document.getElementById('responseMessage');
+      
+      // Check if files are selected
+      if (fileInput.files.length === 0) {
+        responseMessage.textContent = 'Please select at least one file to upload.';
+        responseMessage.classList.remove('success', 'error');
+        responseMessage.classList.add('error');
+        return;
+      }
+
+      // Prepare form data
+      const formData = new FormData();
+      for (const file of fileInput.files) {
+        formData.append('file', file);
+      }
+
+      try {
+        const response = await fetch('http://127.0.0.1:5003/upload', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await response.json();
+
+        // Display the response message
+        responseMessage.textContent = result.message;
+        responseMessage.classList.remove('success', 'error');
+        responseMessage.classList.add(response.ok ? 'success' : 'error');
+      } catch (error) {
+        console.error('Error uploading file:', error);
+        responseMessage.textContent = 'An error occurred while uploading the file.';
+        responseMessage.classList.remove('success', 'error');
+        responseMessage.classList.add('error');
+      }
+    });
+  </script>
+</body>
+</html>

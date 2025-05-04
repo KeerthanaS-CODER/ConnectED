@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Squid Game Talking Bot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Oregano:ital@0;1&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0f2f5, #e0e4ec);
+            color: #333;
+            height: 100vh;
+            display: flex;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background: #1e1e2f;
+            padding: 20px;
+            gap: 20px;
+            width: 220px;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            background: #33344e;
+        }
+
+        .sidebar i {
+            font-size: 18px;
+        }
+
+        .main-content {
+            padding: 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 2000px;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-family: 'Oregano', cursive;
+            font-size: 32px;
+            font-weight: bold;
+            color: #2c003e;
+        }
+
+        .header input[type="search"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .header i {
+            font-size: 28px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        img#botImage {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            margin: 30px auto;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            border: 5px solid #ff69b4; /* Pink border for Squid Game */
+            transition: opacity 0.5s ease, transform 0.3s ease;
+            opacity: 1;
+            object-fit: cover;
+        }
+
+        .fade-out {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        #response {
+            color: #007bff;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin: 25px 0;
+            padding: 20px;
+            width: 100%;
+            max-width: 650px;
+            text-align: justify;
+            background: #fff;
+            border: 2px solid #33344e; /* Dark blue border */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            word-spacing: normal;
+            overflow-wrap: break-word;
+            box-sizing: border-box;
+            white-space: pre-wrap;
+        }
+
+        #query {
+            color: #000;
+            font-size: 1.2rem;
+            margin: 15px 0;
+            padding: 15px;
+            width: 100%;
+            max-width: 650px;
+            text-align: center;
+            background: #fff;
+            border: 1px solid #33344e;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow-wrap: break-word;
+        }
+
+        button {
+            padding: 12px 30px; /* Reduced padding to match response box size */
+            font-size: 1.1rem; /* Adjusted font size for proportionality */
+            background: #33344e; /* Dark blue base */
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 10px rgba(51, 52, 78, 0.3);
+            width: 100%; /* Full width within max-width */
+            max-width: 650px; /* Match response box width */
+            margin: 10px 0;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #28a745, #ff69b4); /* Green to pink gradient */
+            transform: translateY(-5px);
+        }
+
+        button:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(51, 52, 78, 0.3);
+        }
+
+        @media (max-width: 600px) {
+            .sidebar {
+                width: 60px;
+            }
+
+            .main-content {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 15px;
+                max-width: 90%;
+            }
+
+            .title {
+                font-size: 24px;
+            }
+
+            img#botImage {
+                width: 200px;
+                height: 200px;
+            }
+
+            #response, #query, button {
+                font-size: 1rem;
+                padding: 12px;
+                max-width: 90%;
+            }
+
+            button {
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <a href="http://127.0.0.1:5000/booking"><i class="fas fa-home"></i> Home</a>
+            <a href="http://127.0.0.1:5002/mentor"><i class="fas fa-desktop"></i> Mentor Space</a>
+            <a href="http://localhost:3001/"><i class="fas fa-comments"></i> Community</a>
+            <a href="https://calendly.com/jagancool61"><i class="fas fa-calendar-alt"></i> Book a Call</a>
+            <a href="https://rasuchan.github.io/WebRTC/ConnectED_starter/lobby.html"><i class="fas fa-clapperboard"></i> Meet Room</a>
+            <a href="http://127.0.0.1:5005"><i class="fas fa-laptop-code"></i> Video Room</a>
+            <a href="http://127.0.0.1:1010"><i class="fas fa-microphone"></i> Voice Assistance</a>
+        </div> 
+        <div class="main-content">
+            <header class="header">
+                <h1 class="title">ConnectED</h1>
+                <input type="search" placeholder="Search..." />
+                <a href="http://127.0.0.1:5001"><i class="fas fa-user-circle"></i></a>
+            </header>
+            <h1 class="title">Squid Game Talking Bot</h1>
+            <img id="botImage" src="/static/normalface.jpeg" alt="Bot Face">
+            <button id="speakButton">Ask Me</button>
+            <div id="query"></div>
+            <div id="response"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const speakButton = document.getElementById('speakButton');
+            const botImage = document.getElementById('botImage');
+            const responseDiv = document.getElementById('response');
+            const queryDiv = document.getElementById('query');
+
+            speakButton.onclick = () => {
+                const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+                recognition.lang = 'en-US';
+                recognition.start();
+
+                // Switch to talking image when recognition starts
+                botImage.src = '/static/talkingface.jpeg';
+                botImage.classList.remove('fade-out');
+
+                recognition.onresult = async function(event) {
+                    const query = event.results[0][0].transcript.toLowerCase();
+                    queryDiv.innerText = `You: ${query}`;
+                    responseDiv.innerText = '';
+                    console.log(`Query received: ${query}`);
+
+                    try {
+                        const res = await fetch('/ask', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ query: query })
+                        });
+
+                        if (!res.ok) {
+                            throw new Error(`HTTP error! Status: ${res.status}`);
+                        }
+
+                        const data = await res.json();
+                        const spokenText = data.spoken_text || 'No response text received';
+                        console.log(`Raw response received: ${spokenText}`);
+
+                        // Enhanced normalization
+                        let normalizedText = spokenText
+                            .replace(/([a-z])([A-Z])/g, '$1 $2')
+                            .replace(/[^a-zA-Z0-9\s]/g, ' ')
+                            .replace(/\s+/g, ' ')
+                            .trim();
+                        const words = normalizedText.split(' ').filter(word => word.length > 0);
+                        console.log(`Processed words:`, words);
+
+                        // Speak the text
+                        const utterance = new SpeechSynthesisUtterance(spokenText);
+                        utterance.lang = 'en-US';
+                        const voices = window.speechSynthesis.getVoices();
+                        const femaleVoice = voices.find(voice => voice.name.toLowerCase().includes('female') || voice.name.toLowerCase().includes('samantha') || voice.name.toLowerCase().includes('victoria'));
+                        if (femaleVoice) {
+                            utterance.voice = femaleVoice;
+                        }
+
+                        // Switch to talking image before speaking
+                        botImage.src = '/static/talkingface.jpeg';
+                        botImage.classList.remove('fade-out');
+
+                        window.speechSynthesis.speak(utterance);
+
+                        // Typewriter effect
+                        let i = 0;
+                        responseDiv.innerText = '';
+                        function typeWriter() {
+                            if (i < words.length) {
+                                if (i === 0) {
+                                    responseDiv.innerText = words[i];
+                                } else {
+                                    responseDiv.innerText += ' ' + words[i];
+                                }
+                                i++;
+                                setTimeout(typeWriter, 200);
+                            } else {
+                                // Wait for speech to end before reverting image
+                                utterance.onend = () => {
+                                    botImage.src = '/static/normalface.jpeg';
+                                    botImage.classList.add('fade-out');
+                                    setTimeout(() => botImage.classList.remove('fade-out'), 500);
+                                };
+                            }
+                        }
+
+                        typeWriter();
+                    } catch (error) {
+                        console.error('Error fetching response:', error);
+                        responseDiv.innerText = 'Error: Could not fetch response.';
+                        botImage.src = '/static/normalface.jpeg';
+                        botImage.classList.add('fade-out');
+                        setTimeout(() => botImage.classList.remove('fade-out'), 500);
+                    }
+                };
+
+                recognition.onerror = function(event) {
+                    console.error('Speech recognition error:', event.error);
+                    responseDiv.innerText = 'Speech recognition error occurred.';
+                    botImage.src = '/static/normalface.jpeg';
+                    botImage.classList.add('fade-out');
+                    setTimeout(() => botImage.classList.remove('fade-out'), 500);
+                };
+
+                recognition.onend = function() {
+                    console.log('Speech recognition ended');
+                };
+            };
+
+            window.speechSynthesis.onvoiceschanged = () => {
+                console.log('Voices loaded:', window.speechSynthesis.getVoices());
+            };
+        });
+    </script>
+</body>
+</html>

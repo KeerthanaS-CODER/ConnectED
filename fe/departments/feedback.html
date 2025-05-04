@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milestone Feedback</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Milestone Popup -->
+    <div id="milestonePopup" class="popup">
+        <h1>MileStone 1 Completed!</h1>
+    </div>
+
+    <!-- Member Selection Containers -->
+    <div id="memberContainer">
+        <h2>Select a Member to Give Feedback</h2>
+        <div id="members">
+            <div class="member" data-member="1">Member 1</div>
+            <div class="member" data-member="2">Member 2</div>
+            <div class="member" data-member="3">Member 3</div>
+            <div class="member" data-member="4">Member 4</div>
+            <div class="member" data-member="5">Member 5</div>
+            <div class="member" data-member="6">Member 6</div>
+            <div class="member" data-member="7">Member 7</div>
+        </div>
+    </div>
+
+    <!-- Feedback Form for Members -->
+    <div id="feedbackFormContainer" class="hidden">
+        <form id="feedbackForm">
+            <h2 id="formTitle">Member Feedback - Member 1</h2>
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="program">Program Name:</label>
+            <input type="text" id="program" name="program" required>
+
+            <label for="mentor">Mentor Name:</label>
+            <input type="text" id="mentor" name="mentor" required>
+
+            <label for="rating">Rating (1-5):</label>
+            <input type="number" id="rating" name="rating" min="1" max="5" required>
+
+            <label for="feedback">Feedback:</label>
+            <textarea id="feedback" name="feedback" rows="4" required></textarea>
+
+            <!-- Updated buttons -->
+            <div class="button-container">
+                <button type="submit">Submit Feedback</button>
+                <button id="getCertificateBtn" class="hidden">Get Certificate</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

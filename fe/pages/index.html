@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectED Landing Page</title>
+    <!-- Link to external CSS --> 
+    <link rel="stylesheet" href="style.css">
+    <!-- Font for Oregano -->
+    <link href="https://fonts.googleapis.com/css2?family=Oregano&display=swap" rel="stylesheet">
+</head>
+<style>
+    /* Global styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    background: linear-gradient(45deg, #000033, #800080); /* Background gradient */
+    overflow: hidden;
+}
+
+/* Glowing Animation */
+@keyframes glowing {
+    0% { text-shadow: 0 0 10px #FF5733, 0 0 20px #FF5733, 0 0 30px #FF5733; }
+    50% { text-shadow: 0 0 20px #FF5733, 0 0 30px #FF5733, 0 0 40px #FF5733; }
+    100% { text-shadow: 0 0 10px #FF5733, 0 0 20px #FF5733, 0 0 30px #FF5733; }
+}
+
+/* Shine Animation */
+@keyframes shine {
+    0% {
+        background-position: -200px;
+    }
+    100% {
+        background-position: 200px;
+    }
+}
+
+/* Container */
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    color: white;
+    position: relative;
+    animation: shine 2s infinite ease-in-out; /* Lighting effect */
+    background: linear-gradient(45deg, #000033, #800080);
+}
+
+/* Left section (Text) */
+.left-section {
+    flex: 1;
+    padding: 20px;
+}
+
+.left-section h1 {
+    font-size: 3rem;
+}
+
+.left-section .tagline {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.left-section .quote {
+    font-style: italic;
+    color: #f0f0f0;
+    margin-bottom: 30px;
+}
+
+/* Animating the text */
+.animated-text {
+    animation: glowing 2s ease-in-out infinite;
+}
+
+/* Button styles */
+.cta-btn {
+    background-color: #FF5733;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Right section (Team Image) */
+.right-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.team-image {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    width: 90%;
+    height: auto;
+}
+
+/* Login/Signup Page */
+.login-page {
+    display: none;
+    height: 100vh;
+    background: linear-gradient(45deg, #000033, #800080);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-page h1 {
+    font-family: 'Oregano', sans-serif;
+    font-size: 5rem;
+    color: #fff;
+    text-shadow: 2px 2px 8px #FF5733;
+}
+
+.login-page .intro-text {
+    font-size: 1.8rem;
+    color: #FFF;
+    margin-bottom: 20px;
+}
+
+.login-page .description {
+    font-size: 1.2rem;
+    color: #f0f0f0;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-btn {
+    background-color: #FF5733;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+
+</style>
+<body>
+
+    <!-- Main landing page -->
+    <div class="container">
+        <div class="left-section">
+            <h1>Welcome to <span class="animated-text">ConnectED!!</span></h1>
+            <p class="tagline">A Gamified Learning Platform</p>
+            <p class="quote">"Empower your learning journey with expert guidance. The future belongs to those who learn more today."</p>
+            <a href="#" class="cta-btn">Next</a>
+        </div>
+
+        <div class="right-section">
+            <img src="punjab.jpg" alt="Group of people" class="team-image">
+        </div>
+    </div>
+
+    <!-- Login Page - Updated to focus only on Login -->
+    <div id="login" class="login-page">
+        <h1>ConnectED</h1>
+        <p class="intro-text">Where your learning adventure begins with the support of experienced mentors.</p>
+        <p class="description">Join our community of learners today! Whether you're here to explore new skills or connect with experts, we are here to help every step of the way.</p>
+        <a href="#" class="login-btn">Login</a> <!-- Text focuses only on Login -->
+    </div>
+
+    <!-- Link to external JS -->
+    <script src="script.js"></script>
+
+</body>
+<script>
+    // JavaScript to handle the page interaction and change quote on the second page
+const ctaBtn = document.querySelector('.cta-btn');
+const container = document.querySelector('.container');
+const loginPage = document.querySelector('#login');
+const description = document.querySelector('.description');
+
+// When "Next" button is clicked, hide the main page and show the login page
+ctaBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    container.style.display = 'none';
+    loginPage.style.display = 'flex';
+
+    // Change the description/quote for the second page
+    description.textContent = "Unlock your potential in a gamified world, connected with mentors who turn learning into an epic quest.";
+});
+</script>
+</html>

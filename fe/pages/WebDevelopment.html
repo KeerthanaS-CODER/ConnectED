@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ConnectED</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Oregano:ital@0;1&display=swap" rel="stylesheet"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0f2f5, #e0e4ec);
+            color: #333;
+            height: 100vh;
+            display: flex;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background: #1e1e2f;
+            padding: 20px;
+            gap: 20px;
+            width: 220px;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            background: #33344e;
+        }
+
+        .sidebar i {
+            font-size: 18px;
+        }
+
+        .main-content {
+            padding: 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .title {
+            font-family: 'Oregano', cursive;
+            font-size: 32px;
+            font-weight: bold;
+            color: #2c003e;
+        }
+
+        .header input[type="search"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .header i {
+            font-size: 28px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #1f1f2e;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            margin: 30px 0;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: white;
+            background: rgba(0, 0, 0, 0.4);
+            border: none;
+            padding: 0 15px;
+            cursor: pointer;
+            z-index: 2;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .nav-btn.left {
+            left: 10px;
+        }
+
+        .nav-btn.right {
+            right: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .courses-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px 0;
+            height: calc(100vh - 100px); /* Adjust height to fit screen */
+            overflow-y: auto; /* Enable scrolling inside this container */
+        }
+
+        .course-card {
+            background-color: #1f1f2e;
+            border: solid white 1px;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+            text-decoration: none;
+        }
+
+        .course-card:hover {
+            background: linear-gradient(135deg, #4B0082, #FF00FF);
+        }
+
+        .course-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .mentor-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .course-details {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex-grow: 1;
+        }
+
+        .course-details h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .course-details p {
+            font-size: 14px;
+            color: #d3cdea;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Section -->
+        <div class="sidebar">
+            <a href="http://127.0.0.1:5000/booking"><i class="fas fa-home"></i> Home</a>
+            <a href="http://127.0.0.1:5002/mentor"><i class="fas fa-desktop"></i> Mentor Space</a>
+            <a href="http://127.0.0.1:3011"><i class="fas fa-comments"></i> Community</a>
+            <a href="https://calendly.com/jagancool61"><i class="fas fa-calendar-alt"></i> Book a Call</a>
+            <a href="https://rasuchan.github.io/WebRTC/ConnectED_starter/lobby.html"><i class="fas fa-clapperboard"></i> Meet Room</a>
+            <a href="http://127.0.0.1:5005"><i class="fas fa-laptop-code"></i> Video Room</a>
+            <a href="http://127.0.0.1:1010"><i class="fas fa-microphone"></i> Voice Assistance</a>
+        </div>
+
+        <!-- Main Content Section -->
+        <div class="main-content">
+            <!-- Header Section -->
+            <header class="header">
+                <h1 class="title">ConnectED</h1>
+                <input type="search" placeholder="Search..." />
+                <a href="http://127.0.0.1:5001"><i class="fas fa-user-circle"></i></a>
+            </header>
+
+            <div class="courses-container">
+                <!-- Course 1 -->
+                <h2>Web Development</h2>
+                <a href="Course1.html" class="course-card">
+                    <div class="course-info">
+                        <div class="course-img">
+                            <img src="vishnu.jpg" alt="Vishnuvasan T S" class="mentor-image">
+                        </div>
+                        <div class="course-details">
+                            <h3>Basic Web Development using HTML, CSS and JS</h3>
+                            <p>Duration: 3 months</p>
+                            <p>Mentor: Vishnuvasan T S</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Course 2 -->
+                <a href="course2.html" class="course-card">
+                    <div class="course-info">
+                        <div class="course-img">
+                            <img src="Grandy.png" alt="Grandy Moss" class="mentor-image">
+                        </div>
+                        <div class="course-details">
+                            <h3>Become web developer using latest tech stack</h3>
+                            <p>Duration: 6 months</p>
+                            <p>Mentor: Grandy Moss</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Course 3 -->
+                <a href="course3.html" class="course-card">
+                    <div class="course-info">
+                        <div class="course-img">
+                            <img src="Brad.png" alt="Brad Dock" class="mentor-image">
+                        </div>
+                        <div class="course-details">
+                            <h3>Getting ready with HTML and CSS</h3>
+                            <p>Duration: 1 month</p>
+                            <p>Mentor: Brad Dock</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="course4.html" class="course-card">
+                    <div class="course-info">
+                        <div class="course-img">
+                            <img src="Jody.png" alt="Andrew Williams" class="mentor-image">
+                        </div>
+                        <div class="course-details">
+                            <h3>Complete REACT Developer</h3>
+                            <p>Duration: 4 months</p>
+                            <p>Mentor: Andrew Williams</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

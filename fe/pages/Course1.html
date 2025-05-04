@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectED</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oregano:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Include Bootstrap for styling the alert -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include jQuery for AJAX -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0f2f5, #e0e4ec);
+            color: #333;
+            height: 100vh;
+            display: flex;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #f0f2f5, #e0e4ec); /* Fallback gradient */
+            overflow: hidden;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background: #1e1e2f;
+            padding: 20px;
+            gap: 20px;
+            width: 220px;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            background: #33344e;
+        }
+
+        .sidebar i {
+            font-size: 18px;
+        }
+
+        .main-content {
+            padding: 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .title {
+            font-family: 'Oregano', cursive;
+            font-size: 32px;
+            font-weight: bold;
+            color: #2c003e;
+        }
+
+        .header input[type="search"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .header i {
+            font-size: 28px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .course-details-card {
+            background-color: #1e1e2f;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            color: white;
+            max-width: 1500px;
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        .head {
+            background-color: #84237ca2;
+            border-radius: 15px;
+        }
+
+        .head:hover {
+            background: linear-gradient(to right, #d53369, #daae51);
+            border-radius: 15px;
+        }
+
+        .course-header {
+            background-color: #84237ca2;
+            padding: 20px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .mentor-info {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .mentor-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: #ccc; /* Placeholder background */
+        }
+
+        .mentor-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .mentor-details h3 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .mentor-details p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .course-button {
+            background-color: #1f0099;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .course-button:hover {
+            background: linear-gradient(135deg, #FF00FF, #4B0082);
+        }
+
+        .course-content {
+            background-color: #1e1e2f;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .course-content h4 {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+
+        .course-content p {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .cont {
+            background-color: #1e1e2f;
+        }
+
+        .cont:hover {
+            background: linear-gradient(to right, #a10f60, #200b65);
+        }
+
+        .course-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .course-content ul li {
+            margin-bottom: 10px;
+        }
+
+        .course-content strong {
+            font-weight: 600;
+        }
+
+        h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+            font-family: Outfit;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 10%;
+            left: 15%;
+            width: 70%;
+            padding: 30px;
+            background-color: #1c1333;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            color: white;
+            z-index: 10;
+        }
+
+        .popup h2 {
+            margin-bottom: 15px;
+        }
+
+        .popup p {
+            line-height: 1.5;
+        }
+
+        .close-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            float: right;
+        }
+
+        .popup-form {
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 25%;
+            width: 50%;
+            padding: 30px;
+            background-color: #1c1333;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            color: white;
+            z-index: 10;
+        }
+
+        .popup-form .form-content {
+            margin-top: 15px;
+        }
+
+        .close-btn-form {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            float: right;
+        }
+
+        .mentor-popup-content {
+            display: flex;
+            gap: 20px;
+        }
+
+        .mentor-popup-content .mentor-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: #ccc; /* Placeholder background */
+        }
+
+        .mentor-description {
+            flex: 1;
+        }
+
+        .popup-form .form-group {
+            margin-bottom: 15px;
+        }
+
+        .popup-form label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .popup-form input[type="text"],
+        .popup-form input[type="email"],
+        .popup-form input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .popup-form input[type="submit"] {
+            background-color: #1f0099;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .popup-form input[type="submit"]:hover {
+            background: linear-gradient(135deg, #FF00FF, #4B0082);
+        }
+
+        .popup-form .alert {
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Section -->
+        <div class="sidebar">
+            <a href="http://127.0.0.1:5000/booking"><i class="fas fa-home"></i> Home</a>
+            <a href="http://127.0.0.1:5002/mentor"><i class="fas fa-desktop"></i> Mentor Space</a>
+            <a href="http://127.0.0.1:3011"><i class="fas fa-comments"></i> Community</a>
+            <a href="https://calendly.com/jagancool61"><i class="fas fa-calendar-alt"></i> Book a Call</a>
+            <a href="https://rasuchan.github.io/WebRTC/ConnectED_starter/lobby.html"><i class="fas fa-clapperboard"></i> Meet Room</a>
+            <a href="http://127.0.0.1:5005"><i class="fas fa-laptop-code"></i> Video Room</a>
+            <a href="http://127.0.0.1:1010"><i class="fas fa-microphone"></i> Voice Assistance</a>
+        </div>
+
+        <!-- Main Content Section -->
+        <div class="main-content">
+            <!-- Header Section -->
+            <header class="header">
+                <h1 class="title">ConnectED</h1>
+                <input type="search" placeholder="Search..." size="100px">
+                <a href="http://127.0.0.1:5001"><i class="fas fa-user-circle"></i></a>
+            </header> 
+            <!-- Course Details Section -->
+            <div class="course-details-card">
+                <!-- Mentor Info and Button -->
+                <h2>Basic Web Development using HTML, CSS and JS</h2>
+                <div class="head">
+                    <div class="course-header">
+                        <div class="mentor-info" id="mentorInfo">
+                            <div class="mentor-image"></div> <!-- Placeholder -->
+                            <div class="mentor-details">
+                                <h3>Mentor: Vishnuvasan T S</h3>
+                                <p>Duration: 3 Months</p>
+                                <p>Available Slots: 10</p>
+                            </div>
+                        </div>
+                        <a class="course-button" id="bookNowBtn">Book Now</a>
+                    </div>
+                </div>
+                <!-- Course Overview -->
+                <div class="course-content">
+                    <div class="cont">
+                        <h4>Overview:</h4>
+                        <p>This 3-month mentor-led program is designed to help beginners master the fundamentals of web development using HTML, CSS, and JavaScript. Guided by industry expert Jody Homes, you’ll learn how to build dynamic, responsive websites from scratch, equipping you with the essential skills for a career in web development.</p>
+                    </div>
+                    <div class="cont">
+                        <h4>What You'll Learn:</h4>
+                        <ul>
+                            <li><strong>HTML:</strong> Structuring web content with proper tags and semantic elements.</li>
+                            <li><strong>CSS:</strong> Designing beautiful, responsive web pages with advanced styling techniques.</li>
+                            <li><strong>JavaScript:</strong> Adding interactivity to your web pages, including event handling and DOM manipulation.</li>
+                            <li><strong>Project Work:</strong> Build your own portfolio-ready website by the end of the program.</li>
+                        </ul>
+                    </div>
+                    <div class="cont">
+                        <h4>Program Highlights:</h4>
+                        <ul>
+                            <li>Hands-On Learning: Work on practical projects and assignments designed to strengthen your coding skills.</li>
+                            <li>One-on-One Mentorship: Direct guidance from Jody Homes, who will provide personalized feedback and career advice.</li>
+                            <li>Interactive Sessions: Weekly live classes and Q&A sessions to discuss key concepts and clear any doubts.</li>
+                            <li>Networking: Connect with like-minded peers and expand your professional network.</li>
+                        </ul>
+                    </div>
+                    <div class="cont">
+                        <h4>Preliminary and Supplementary Domains:</h4>
+                        <li>Preliminary Domains: HTML, CSS, JavaScript</li>
+                        <li>Supplementary Domains: API integration, File handling, Networks, UI & UX design</li>
+                    </div>
+                    <div class="cont">
+                        <h4>Selection Criteria:</h4>
+                        <p>Limited Availability: We are only selecting 15 passionate and dedicated mentees to ensure personalized attention.</p>
+                        <p>Application Process: Applicants will be assessed based on their interest in web development, commitment to learning, and potential to benefit from the program.</p>
+                        <p>Final Selection: Shortlisted candidates will be invited for a brief interview before the final selection.</p>
+                    </div>
+                    <div class="cont">
+                        <h4>Program Requirements:</h4>
+                        <ul>
+                            <li>Basic Computer Skills: Familiarity with computers and the internet is required.</li>
+                            <li>Time Commitment: Participants are expected to dedicate 6-8 hours per week for live sessions, assignments, and self-study.</li>
+                        </ul>
+                    </div>
+                    <div class="cont">
+                        <p><strong>Deadline for Applications:</strong> September 20, 2024</p>
+                        <p>If you're looking to start a career in web development or enhance your skills, this is a unique opportunity to learn from an experienced mentor. Apply today and be one of the 15 selected mentees to embark on this exciting journey!</p>
+                    </div>
+                </div>
+                <div id="mentorPopup" class="popup">
+                    <button class="close-btn" id="closePopup">Close</button>
+                    <h2>Vishnuvasan T S</h2>
+                    <div class="mentor-popup-content">
+                        <div class="mentor-image"></div> <!-- Placeholder -->
+                        <div class="mentor-description">
+                            <p><b>Position:</b> Senior Developer, Microsoft</p>
+                            <p><b>Experience:</b> 12 years in full-stack development, specializing in JavaScript, React, and cloud-native solutions.</p>
+                            <p><b>Achievements:</b> Led multiple high-profile projects at Microsoft, Speaker at JavaScript Conf 2022.</p><br>
+                            <a class="course-button">Chat</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="bookFormPopup" class="popup-form">
+                    <button class="close-btn-form" id="closeFormPopup">Close</button>
+                    <h2>Book Your Slot</h2>
+                    <div class="form-content">
+                        <form id="bookForm" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input type="text" id="name" name="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" name="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="resume">Upload Resume:</label>
+                                <input type="file" id="resume" name="resume_file" class="form-control-file" required>
+                            </div>
+                            <input type="submit" value="Submit" class="btn btn-primary">
+                        </form>
+                        <div id="uploadMessage" class="alert" role="alert"></div>
+                    </div>
+                </div>
+            </div>        
+        </div>
+    </div>
+    <script>
+        // Popup logic for mentor
+        const mentorInfo = document.getElementById('mentorInfo');
+        const mentorPopup = document.getElementById('mentorPopup');
+        const closePopup = document.getElementById('closePopup');
+
+        mentorInfo.addEventListener('click', function() {
+            mentorPopup.style.display = 'block';
+        });
+
+        closePopup.addEventListener('click', function() {
+            mentorPopup.style.display = 'none';
+        });
+
+        // Popup logic for Book Now form
+        const bookNowBtn = document.getElementById('bookNowBtn');
+        const bookFormPopup = document.getElementById('bookFormPopup');
+        const closeFormPopup = document.getElementById('closeFormPopup');
+
+        bookNowBtn.addEventListener('click', function() {
+            bookFormPopup.style.display = 'block';
+        });
+
+        closeFormPopup.addEventListener('click', function() {
+            bookFormPopup.style.display = 'none';
+        });
+
+        // AJAX form submission for Book Your Slot
+        $(document).ready(function() {
+            $('#bookForm').on('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Create FormData object to handle file upload
+                const formData = new FormData(this);
+
+                $.ajax({
+                    url: 'http://127.0.0.1:5110/upload', // Absolute URL to Flask server
+                    type: 'POST',
+                    data: formData,
+                    processData: false, // Required for file uploads
+                    contentType: false, // Required for file uploads
+                    success: function(response) {
+                        // Show success message
+                        $('#uploadMessage')
+                            .removeClass('alert-danger')
+                            .addClass('alert-success')
+                            .text(response.message)
+                            .show();
+                        // Clear the form
+                        $('#bookForm')[0].reset();
+                    },
+                    error: function(xhr) {
+                        // Show error message
+                        const errorMessage = xhr.responseJSON && xhr.responseJSON.error
+                            ? xhr.responseJSON.error
+                            : 'An error occurred during submission.';
+                        $('#uploadMessage')
+                            .removeClass('alert-success')
+                            .addClass('alert-danger')
+                            .text(errorMessage)
+                            .show();
+                    }
+                });
+            });
+
+            // Hide alert when clicking on it
+            $('#uploadMessage').on('click', function() {
+                $(this).hide();
+            });
+        });
+    </script>
+</body>
+</html>

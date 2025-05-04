@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Available Programs</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Oregano:ital@0;1&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f0f2f5, #e0e4ec);
+      color: #333;
+      display: flex;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 220px;
+      background: #1e1e2f;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      gap: 20px;
+      z-index: 999;
+    }
+
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .sidebar a:hover {
+      background: #33344e;
+    }
+
+    .sidebar i {
+      font-size: 18px;
+    }
+
+    .main-content {
+      margin-left: 240px;
+      padding: 30px;
+      width: calc(100% - 240px);
+      overflow-y: auto;
+      height: 100vh;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    .title {
+      font-family: 'Oregano', cursive;
+      font-size: 32px;
+      font-weight: bold;
+      color: #2c003e;
+    }
+
+    .header input[type="search"] {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .header i {
+      font-size: 28px;
+      color: #333;
+      cursor: pointer;
+    }
+
+    h1 {
+      color: #2c003e;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    li {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    li h2 {
+      color: #4B0082;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    li p {
+      margin-bottom: 8px;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .flashes {
+      margin-bottom: 20px;
+    }
+
+    .flashes li {
+      background: #ffefc1;
+      padding: 10px 15px;
+      border-left: 5px solid #ffc107;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <a href="http://127.0.0.1:5000/booking"><i class="fas fa-home"></i> Home</a>
+    <a href="http://127.0.0.1:5002/mentor"><i class="fas fa-desktop"></i> Mentor Space</a>
+    <a href="http://localhost:3011/"><i class="fas fa-comments"></i> Community</a>
+    <a href="https://calendly.com/jagancool61"><i class="fas fa-calendar-alt"></i> Book a Call</a>
+    <a href="https://rasuchan.github.io/WebRTC/ConnectED_starter/lobby.html"><i class="fas fa-clapperboard"></i> Meet Room</a>
+    <a href="http://127.0.0.1:5005"><i class="fas fa-laptop-code"></i> Video Room</a>
+    <a href="http://127.0.0.1:1010"><i class="fas fa-microphone"></i> Voice Assistance</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <header class="header">
+      <h1 class="title">ConnectED</h1>
+      <input type="search" placeholder="Search..." />
+      <a href="http://127.0.0.1:5001"><i class="fas fa-user-circle"></i></a>
+    </header>
+
+    <h1>Available Programs</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <ul>
+      {% for program in programs %}
+        <li>
+          <h2>{{ program['program_name'] }}</h2>
+          <p><strong>Duration:</strong> {{ program['duration'] }}</p>
+          <p><strong>Available Slots:</strong> {{ program['available_slots'] }}</p>
+          <p><strong>Overview:</strong> {{ program['overview'] }}</p>
+          <p><strong>Learning Path:</strong> {{ program['learning_path'] }}</p>
+          <p><strong>Highlights:</strong> {{ program['highlights'] }}</p>
+          <p><strong>Preliminary Domains:</strong> {{ program['preliminary_domains'] }}</p>
+          <p><strong>Supplemented Domains:</strong> {{ program['supplemented_domains'] }}</p>
+          <p><strong>Requirements:</strong> {{ program['requirements'] }}</p>
+          <p><strong>Deadline:</strong> {{ program['deadline'] }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</body>
+</html>
